@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gucci Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">GUCCI</div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <input type="text" id="search" placeholder="Search...">
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <video autoplay muted loop>
+            <source src="gucci-ad.mp4" type="video/mp4">
+        </video>
+        <div class="hero-text">Luxury Redefined</div>
+    </section>
+    
+    <section id="products">
+        <h2>Our Collection</h2>
+        <select id="sort">
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+        </select>
+        <div class="product-list">
+            <div class="product">
+                <img src="bag.jpg" alt="Gucci Bag">
+                <p>Gucci Luxury Handbag - $1500</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="shoes.jpg" alt="Gucci Shoes">
+                <p>Gucci Sneakers - $800</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Gucci. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
