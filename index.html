@@ -1,55 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gucci Store</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colorful Shopping Website</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('https://images.unsplash.com/photo-1542831371-d531d36971e6') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+    header, footer {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 1em;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background-color: rgba(255, 105, 180, 0.8);
+      padding: 1em;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .container {
+      padding: 2em;
+    }
+    .product {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #000;
+      border-radius: 10px;
+      margin: 1em;
+      padding: 1em;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    .search-filter {
+      text-align: center;
+      margin-bottom: 2em;
+    }
+    .search-filter input, .search-filter select {
+      padding: 0.5em;
+      margin: 0.5em;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      padding: 0.5em 1em;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ff1493;
+    }
+    video {
+      width: 100%;
+      max-width: 600px;
+      display: block;
+      margin: 2em auto;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">GUCCI</div>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <input type="text" id="search" placeholder="Search...">
-        </nav>
-    </header>
-    
-    <section class="hero">
-        <video autoplay muted loop>
-            <source src="gucci-ad.mp4" type="video/mp4">
-        </video>
-        <div class="hero-text">Luxury Redefined</div>
-    </section>
-    
-    <section id="products">
-        <h2>Our Collection</h2>
-        <select id="sort">
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
-        </select>
-        <div class="product-list">
-            <div class="product">
-                <img src="bag.jpg" alt="Gucci Bag">
-                <p>Gucci Luxury Handbag - $1500</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="product">
-                <img src="shoes.jpg" alt="Gucci Shoes">
-                <p>Gucci Sneakers - $800</p>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-    </section>
-    
-    <footer>
-        <p>&copy; 2025 Gucci. All Rights Reserved.</p>
-    </footer>
+  <header>
+    <h1>Welcome to ColorShop</h1>
+    <p>Your one-stop colorful shopping destination!</p>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="container">
+    <div class="search-filter">
+      <input type="text" id="searchBox" placeholder="Search products...">
+      <select id="sortOptions">
+        <option value="default">Sort By</option>
+        <option value="name">Name</option>
+        <option value="price">Price</option>
+      </select>
+      <button onclick="applyFilters()">Apply</button>
+    </div>
+
+    <video controls>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      Your browser does not support HTML video.
+    </video>
+
+    <div class="products" id="productList">
+      <div class="product" data-name="Rainbow Sneakers" data-price="49">
+        <img src="https://via.placeholder.com/150" alt="Sneakers">
+        <h2>Rainbow Sneakers</h2>
+        <p>$49.00</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product" data-name="Sunset Dress" data-price="79">
+        <img src="https://via.placeholder.com/150" alt="Dress">
+        <h2>Sunset Dress</h2>
+        <p>$79.00</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product" data-name="Neon Jacket" data-price="99">
+        <img src="https://via.placeholder.com/150" alt="Jacket">
+        <h2>Neon Jacket</h2>
+        <p>$99.00</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 ColorShop. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function applyFilters() {
+      const search = document.getElementById('searchBox').value.toLowerCase();
+      const sort = document.getElementById('sortOptions').value;
+      const products = Array.from(document.querySelectorAll('.product'));
+
+      let filtered = products.filter(p =>
+        p.dataset.name.toLowerCase().includes(search)
+      );
+
+      if (sort === 'name') {
+        filtered.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
+      } else if (sort === 'price') {
+        filtered.sort((a, b) => parseFloat(a.dataset.price) - parseFloat(b.dataset.price));
+      }
+
+      const container = document.getElementById('productList');
+      container.innerHTML = '';
+      filtered.forEach(p => container.appendChild(p));
+    }
+  </script>
 </body>
 </html>
+
